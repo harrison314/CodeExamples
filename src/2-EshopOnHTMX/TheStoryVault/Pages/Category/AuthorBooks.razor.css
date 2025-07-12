@@ -1,0 +1,12 @@
+﻿button {
+    max-width: 3em;
+}
+
+.text-center{
+    width: 100%;
+}
+
+[role=group] {
+    display: block;
+    margin-top: 1rem;
+}

@@ -1,0 +1,38 @@
+﻿@using TheStoryVault.Pages.Category.UseCases
+@using TheStoryVault.Services.Contracts
+@layout MainLayout
+
+<PageTitle>Cathegory - @this.Cathegory.Name</PageTitle>
+
+<div class="grid">
+    <div>
+    </div>
+    <div class="col-2">
+        <h1>@this.Cathegory.Name</h1>
+        <section>
+            @foreach (var genre in this.Cathegory.Decription.AsSpan().EnumerateLines())
+            {
+                <p>@genre.ToString()</p>
+            }
+        </section>
+
+        <AuthorBooks CategoryId="@this.Cathegory.Id" BookPager="@this.BookPager" />
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public CategoryData Cathegory
+    {
+        get;
+        set;
+    } = default!;
+
+    [Parameter]
+    public BookPager BookPager
+    {
+        get;
+        set;
+    } = default!;
+
+}

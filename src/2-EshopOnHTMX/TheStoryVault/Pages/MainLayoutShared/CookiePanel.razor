@@ -1,0 +1,25 @@
+﻿<aside class="cookie-banner">
+    <h3>Try our cookies</h3>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacus lorem, iaculis nec metus eu, fringilla sodales nunc. Pellentesque mattis enim sed lacinia commodo. Vivamus purus lacus, auctor id tempor vitae, placerat quis dui. Donec at sem purus. Donec arcu ipsum, mattis et orci nec, ultrices dictum elit. In molestie tempus pellentesque. Curabitur vitae vehicula nisl.
+    </p>
+
+    <section class="text-right">
+        <button class="outline"
+                hx-post="/Common/Cookies/Necessary"
+                hx-target=".cookie-banner"
+                hx-swap="outerHTML">
+            Only necessary
+        </button>
+        <button class=""
+                hx-post="/Common/Cookies/All"
+                hx-target=".cookie-banner"
+                hx-swap="outerHTML">
+            I understand
+        </button>
+    </section>
+</aside>
+
+@code {
+
+}

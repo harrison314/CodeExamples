@@ -1,0 +1,11 @@
+﻿.grid {
+    margin-bottom: 0.5rem;
+}
+
+article.htmx-request > div {
+    display: none;
+}
+
+article.htmx-request > .htmx-indicator {
+    display: block;
+}

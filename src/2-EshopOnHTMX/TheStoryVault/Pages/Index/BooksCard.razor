@@ -1,0 +1,37 @@
+﻿@using TheStoryVault.Services.Contracts
+<article>
+    <h3>@this.Title</h3>
+    <small>@this.Description</small>
+    <div>
+        @foreach (BookRecord record in this.Books)
+        {
+            <TheStoryVault.Pages.MainLayoutShared.BookInfoVertical Book="@record" />
+        }
+    </div>
+</article>
+
+@code {
+    [Parameter, EditorRequired]
+    public string Title
+    {
+        get;
+        set;
+    } = default!;
+
+
+    [Parameter, EditorRequired]
+    public string Description
+    {
+        get;
+        set;
+    } = default!;
+
+
+    [Parameter, EditorRequired]
+    public IEnumerable<BookRecord> Books
+    {
+        get;
+        set;
+    } = default!;
+
+}

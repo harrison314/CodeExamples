@@ -1,0 +1,26 @@
+﻿@using TheStoryVault.Services.Contracts
+
+<h2 class="htmx-request-none">Results</h2>
+<h2 aria-busy="true" class="htmx-indicator">Loading...</h2>
+
+@if (this.Results is not null && this.Results.Any())
+{
+    @foreach (var result in this.Results)
+    {
+        <TheStoryVault.Pages.MainLayoutShared.BookInfoHorizontal Book="@result" />
+    }
+}
+else
+{
+    <p>No results found.</p>
+}
+
+@code {
+    [Parameter, EditorRequired]
+    public IList<BookRecord> Results
+    {
+        get;
+        set;
+    } = default!;
+
+}

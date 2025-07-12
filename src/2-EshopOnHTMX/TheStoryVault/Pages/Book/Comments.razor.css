@@ -1,0 +1,28 @@
+﻿.avatar {
+    font-size: 2.5em;
+    display: inline-block;
+    margin: 5px;
+}
+
+section > header {
+    margin-bottom: 1.2rem;
+    vertical-align: text-top;
+}
+
+.comment {
+    margin-bottom: 1.5rem;
+}
+
+
+.selected {
+    color: var(--pico-color-amber-150);
+}
+
+
+.htmx-indicator-button {
+    display: none;
+}
+
+    .htmx-indicator-button.htmx-request {
+        display: block !important;
+    }

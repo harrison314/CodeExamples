@@ -1,0 +1,44 @@
+﻿@using TheStoryVault.Services.Contracts
+@inject IBasketApi basketApi
+
+    @if(this.itemsCount == 0)
+{
+    <a href="/cart"
+       role="button"
+       class="secondary outline"
+       hx-swap-oob="@this.OobSwap"
+       id="CardButton">
+        🛒 Cart
+    </a>
+}
+else
+{
+    <a href="/cart"
+       role="button"
+       class="secondary"
+       hx-swap-oob="@this.OobSwap"
+       id="CardButton">
+        🛒 Cart (@(this.itemsCount))
+    </a>
+}
+
+@code {
+    private int itemsCount = 0;
+
+    [Parameter, EditorRequired]
+    public bool Swap
+    {
+        get;
+        set;
+    }
+
+    private string? OobSwap
+    {
+        get => this.Swap ? "true" : null;
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        this.itemsCount = await basketApi.GetCountItems(default);
+    }
+}

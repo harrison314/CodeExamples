@@ -1,0 +1,17 @@
+﻿@layout MainLayout
+<PageTitle>Cart</PageTitle>
+
+<h1>Cart</h1>
+<div>
+    <CartGrid Cart="@this.Cart" SwapCardButton="false" />
+</div>
+
+@code {
+    [Parameter]
+    public BookCartTotal Cart
+    {
+        get;
+        set;
+    } = default!;
+
+}

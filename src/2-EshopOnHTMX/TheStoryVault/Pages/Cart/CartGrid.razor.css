@@ -1,0 +1,32 @@
+﻿.inputs input {
+    text-align: center;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.inputs button {
+    font-weight: 800;
+    text-align: center;
+}
+
+.grid {
+    margin: 1rem;
+}
+
+.price {
+    font-size: 2.0rem;
+    font-weight: 800;
+}
+
+
+.htmx-request fieldset {
+    display: none;
+}
+
+.htmx-indicator {
+    display: none;
+}
+
+.htmx-request .htmx-indicator {
+    display: block;
+}
