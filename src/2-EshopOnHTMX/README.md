@@ -1,6 +1,16 @@
 # eShop on HTMX
+An eShop demonstration of a shop selling books built on ASP.NET Core, Blazor components and HTMX.
 
-TODO: description and technologies
+This project tests the capabilities of HTMX on a non-trivial task where SPA frameworks are commonly used.
+I went to the extreme and tried not to use JavaScript, so even the modal windows are closed by the server call.
+
+
+## Get started
+1. Install [.Net 9 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
+1. Build using `dotnet build`
+1. Configure connection string and database type in _appsettings.json_ (MsSql, Sqlite or MariaDb)
+1. Create database with data using `dotnet run -- --migrate`
+1. Run project using `dotnet run`
 
 ## Technologies
 - [.NET 9.0](https://dotnet.microsoft.com/en-us/download/dotnet/9.0) - TODO
