@@ -15,8 +15,8 @@ Some components are lazy to load because they have a separate cache. Others, to 
 1. Run project using `dotnet run`
 
 ## Technologies
-- [.NET 9.0](https://dotnet.microsoft.com/en-us/download/dotnet/9.0) - TODO
-- [ASP.NET Minimal API](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis?view=aspnetcore-9.0) - TODO
+- [.NET 9.0](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
+- [ASP.NET Minimal API](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis?view=aspnetcore-9.0)
 - [Blazor Components](https://learn.microsoft.com/en-us/aspnet/core/blazor/?view=aspnetcore-9.0) - for reusable UI components
 - [HTMX](https://htmx.org/) - for dynamic HTML updates
 - [PicoCSS](https://picocss.com/) - a lightweight CSS framework for semantic HTML
