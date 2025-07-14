@@ -4,6 +4,8 @@ An eShop demonstration of a shop selling books built on ASP.NET Core, Blazor com
 This project tests the capabilities of HTMX on a non-trivial task where SPA frameworks are commonly used.
 I went to the extreme and tried not to use JavaScript, so even the modal windows are closed by the server call.
 
+Some components are lazy to load because they have a separate cache. Others, to save performance (comments for a book), are loaded only when the user scrolls to them.
+
 
 ## Get started
 1. Install [.Net 9 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
