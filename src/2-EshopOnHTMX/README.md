@@ -48,3 +48,9 @@ Some components are lazy to load because they have a separate cache. Others, to 
 
 ## Motivation for using HTMX
 [![Interview with Senior JS Developer 2024](https://img.youtube.com/vi/aWfYxg-Ypm4/0.jpg)](https://www.youtube.com/watch?v=aWfYxg-Ypm4)
+
+## Additional resources
+1. <https://www.bensampica.com/post/minimalapihtmx/>
+1. <https://khalidabuhakmeh.com/update-html-elements-with-htmx-triggers-and-aspnet-core>
+1. <https://khalidabuhakmeh.com/server-sent-events-in-aspnet-core-and-dotnet-10>
+1. <https://khalidabuhakmeh.com/alpinejs-polling-aspnet-core-apis-for-updates>
