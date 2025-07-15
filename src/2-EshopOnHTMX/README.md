@@ -6,6 +6,7 @@ I went to the extreme and tried not to use JavaScript, so even the modal windows
 
 Some components are lazy to load because they have a separate cache. Others, to save performance (comments for a book), are loaded only when the user scrolls to them.
 
+The backend is not tuned the way I would like, because I started with the service architecture and later rewrite it into the vertical slices architecture.
 
 ## Get started
 1. Install [.Net 9 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
