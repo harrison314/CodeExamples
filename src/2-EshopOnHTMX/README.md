@@ -1,4 +1,9 @@
 # eShop on HTMX
+
+[![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-5C2992.svg?logo=sqlite&logoColor=white)](#)
+[![HTMX](https://img.shields.io/badge/HTMX-36C?logo=htmx&logoColor=fff)](#)
+[![SQLite](https://img.shields.io/badge/SQLite-%2307405e.svg?logo=sqlite&logoColor=white)](#)
+
 An eShop demonstration of a shop selling books built on ASP.NET Core, Blazor components and HTMX.
 
 This project tests the capabilities of HTMX on a non-trivial task where SPA frameworks are commonly used.
