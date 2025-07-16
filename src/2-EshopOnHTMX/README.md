@@ -1,8 +1,11 @@
 # eShop on HTMX
 
-[![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-5C2992.svg?logo=sqlite&logoColor=white)](#)
+[![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-5C2992.svg?logo=dotnet&logoColor=white)](#)
+[![Blazor](https://img.shields.io/badge/Blazor-5C2992.svg?logo=blazor&logoColor=white)](#)
 [![HTMX](https://img.shields.io/badge/HTMX-36C?logo=htmx&logoColor=fff)](#)
+[![SQL Server](https://img.shields.io/badge/SQL%20Server-%2307405e.svg?logo=mariadb&logoColor=white)](#)
 [![SQLite](https://img.shields.io/badge/SQLite-%2307405e.svg?logo=sqlite&logoColor=white)](#)
+[![MariaDB](https://img.shields.io/badge/MariaDB-%2307405e.svg?logo=mariadb&logoColor=white)](#)
 
 An eShop demonstration of a shop selling books built on ASP.NET Core, Blazor components and HTMX.
 
