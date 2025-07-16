@@ -23,6 +23,9 @@ The backend is not tuned the way I would like, because I started with the servic
 1. Run project using `dotnet run`
 
 ## Technologies
+The project is linked so that each page is placed in a separate folder that contains the main content and all its components,
+static class `Endpoint` contains the definitions of the endpoints used for that page.
+
 - [.NET 9.0](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
 - [ASP.NET Minimal API](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis?view=aspnetcore-9.0)
 - [Blazor Components](https://learn.microsoft.com/en-us/aspnet/core/blazor/?view=aspnetcore-9.0) - for reusable UI components
