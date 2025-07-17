@@ -1,0 +1,43 @@
+﻿@using TheStoryVault.Pages.Category.UseCases
+@using TheStoryVault.Services.Contracts
+
+<article>
+    <h2>Last books</h2>
+    <div>
+        @foreach (var book in this.BookPager.Books)
+        {
+            <TheStoryVault.Pages.MainLayoutShared.BookInfoVertical Book="@book" />
+        }
+    </div>
+    <div class="text-center">
+        <div role="group">
+            <button role="button" class="secondary" disabled="@(!this.BookPager.CanPrevious)"
+                    hx-get="/category/@(this.CategoryId)/books?page=@(this.BookPager.Page - 1)"
+                    hx-target="closest article" hx-swap="outerHTML">
+                &laquo;
+            </button>
+            <button role="button" class="outline" disabled="@true"> @BookPager.Page </button>
+            <button role="button" class="secondary" disabled="@(!this.BookPager.CanNext)"
+                    hx-get="/category/@(this.CategoryId)/books?page=@(this.BookPager.Page + 1)"
+                    hx-target="closest article" hx-swap="outerHTML">
+                &raquo;
+            </button>
+        </div>
+    </div>
+</article>
+
+@code {
+    [Parameter]
+    public int CategoryId
+    {
+        get;
+        set;
+    } = default!;
+
+    [Parameter]
+    public BookPager BookPager
+    {
+        get;
+        set;
+    } = default!;
+}

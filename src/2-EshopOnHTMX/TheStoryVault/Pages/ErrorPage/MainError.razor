@@ -1,0 +1,23 @@
+﻿<article>
+    <header>
+        <h1>Error</h1>
+    </header>
+
+    <dl>
+        <dt><strong>Time</strong></dt>
+        <dd>@DateTimeOffset.UtcNow (UTC)</dd>
+
+        <dt><strong>Error</strong></dt>
+        <dd>@this.ErrorMessage</dd>
+    </dl>
+</article>
+
+@code {
+    [Parameter]
+    public string? ErrorMessage
+    {
+        get;
+        set;
+    } = "An unexpected error occurred.";
+
+}

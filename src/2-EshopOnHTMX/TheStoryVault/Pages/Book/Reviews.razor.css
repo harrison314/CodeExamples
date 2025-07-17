@@ -1,0 +1,60 @@
+﻿/*progress::-webkit-progress-bar {
+    background-color: #eee;
+}*/
+
+progress::-webkit-progress-value {
+    background-color: var(--pico-color-amber-150);
+}
+
+progress::-moz-progress-bar {
+    background-color: var(--pico-color-amber-150);
+}
+
+.review-table {
+}
+
+    .review-table td:nth-child(1) {
+        width: 30%;
+        color: var(--pico-color-amber-150);
+        font-size: 150%;
+    }
+
+    .review-table td:nth-child(2) {
+        width: 20%;
+        text-align: right;
+    }
+
+    .review-table td:nth-child(3) {
+        width: 50%;
+    }
+
+
+.number-review {
+    margin-top: 1rem;
+    font-size: 2.0rem;
+    font-weight: 800;
+}
+
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    cursor: pointer;
+}
+
+    .rating span {
+        font-size: 2rem;
+        transition: transform 0.2s;
+        cursor: pointer;
+    }
+
+        .rating span:hover,
+        .rating span:hover ~ span {
+            transform: scale(1.4);
+            color: var(--pico-color-amber-150);
+        }
+
+    .rating .selected {
+        color: var(--pico-color-amber-150);
+    }

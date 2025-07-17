@@ -1,0 +1,14 @@
+﻿@layout MainLayout
+
+<PageTitle>Search results</PageTitle>
+<Search Model="@this.Model" />
+
+@code {
+    [Parameter, EditorRequired]
+    public SearchModel Model
+    {
+        get;
+        set;
+    } = default!;
+
+}

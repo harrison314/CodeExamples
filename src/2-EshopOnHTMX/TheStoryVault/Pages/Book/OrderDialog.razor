@@ -1,0 +1,67 @@
+﻿@using TheStoryVault.Services.Contracts
+<dialog open="true"
+        hx-get="/book/card/close"
+        hx-trigger="click[event.target.matches('dialog')]"
+        hx-target="closest dialog"
+        hx-swap="outerHTML">
+    <article>
+        <header>
+            <button rel="prev"
+                    aria-label="Close"
+                    hx-get="/book/card/close"
+                    hx-target="closest dialog"
+                    hx-swap="outerHTML"></button>
+
+            <h6>You have added to your cart</h6>
+        </header>
+        <section>
+            <div class="grid">
+                <div class="text-center">
+                    <img src="@this.Book.CoverImageUrl" width="80" />
+                </div>
+                <div class="col-2">
+                    <a href="/book/@(this.Book.Id)" class="contrast block">
+                        <strong>@this.Book.Title</strong>
+                    </a>
+                    <small class="block">@this.Book.Author</small>
+                </div>
+            </div>
+        </section>
+        <hr />
+        <section>
+            <p class="">Total</p>
+            <div class="price">@this.Price.ToString("0.00") €</div>
+        </section>
+
+        <footer>
+            <button  role="button"
+                    hx-get="/book/card/close"
+                    hx-target="closest dialog"
+                    hx-swap="outerHTML">
+                Continue shopping
+            </button>
+            <a href="/cart" class="secondary" role="button">
+                🛒 View card
+            </a>
+        </footer>
+    </article>
+</dialog>
+
+<TheStoryVault.Pages.MainLayoutShared.CardButton Swap="true" />
+
+@code {
+    [Parameter]
+    public BookRecord Book
+    {
+        get;
+        set;
+    } = default!;
+
+    [Parameter]
+    public decimal Price
+    {
+        get;
+        set;
+    }
+
+}

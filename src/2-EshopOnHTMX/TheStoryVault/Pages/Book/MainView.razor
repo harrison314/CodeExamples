@@ -1,0 +1,132 @@
+﻿@using TheStoryVault.Services.Contracts
+@layout MainLayout
+
+<PageTitle>Book - @this.Book.Title</PageTitle>
+
+<div class="grid">
+    <div>
+        <div class="text-center">
+            <img src="@Book.CoverImageUrl" alt="@Book.Title" />
+        </div>
+    </div>
+    <div class="col-2">
+        <header>
+            <nav aria-label="breadcrumb" style="--pico-nav-breadcrumb-divider: '‖';">
+                <ul>
+                    @foreach (var category in this.Book.Categories)
+                    {
+                        <li><a href="/category/@(category.Id)" class="contrast">@category.Name</a></li>
+                    }
+                </ul>
+            </nav>
+
+            <h1>@this.Book.Title</h1>
+            <p>
+                <a href="/author/@(this.Book.AuthorId)" class="contrast"><strong>@this.Book.Author</strong></a>
+            </p>
+        </header>
+
+        <article>
+            <p>Buy by:</p>
+            <section class="price">@this.Book.Price.ToString(".00") €</section>
+
+            <button role="button"
+                    hx-post="/book/card"
+                    hx-vars="itemId:@(this.Book.Id)"
+                    hx-target="body"
+                    hx-swap="beforeend">
+                🛒 Insert to cart
+            </button>
+            <button role="button"
+                    hx-post="/book/buyNow"
+                    hx-vars="itemId:@(this.Book.Id)"
+                    hx-swap="none">
+                🛒 Buy now
+            </button>
+            <button role="button"
+                    class="outline"
+                    hx-post="/book/like"
+                    hx-vars="itemId:@(this.Book.Id)"
+                    hx-target="this"
+                    hx-swap="outerHTML"
+                    data-tooltip="This button will cause a server error.">
+                ❤️
+            </button>
+        </article>
+
+        <section>
+            @foreach (var genre in this.Book.Description.AsSpan().EnumerateLines())
+            {
+                <p>@genre.ToString()</p>
+            }
+        </section>
+
+        <article class="grid">
+            <div>
+                ISBN<br />
+                <em>@this.Book.ISBN</em>
+                <br /><br />
+
+                Language<br />
+                <em>@this.Book.Language</em>
+                <br /><br />
+
+                Publisher<br />
+                <em>@this.Book.Publisher</em>
+                <br /><br />
+
+                Publish year<br />
+                <em>@this.Book.PublishedDate.ToString("yyyy")</em>
+            </div>
+            <div>
+                <span>Original name</span><br />
+                <em>@this.Book.Title</em>
+                <br />
+                <br />
+
+                <span>Cathegories</span><br />
+                <ul>
+                    @foreach (var category in this.Book.Categories)
+                    {
+                        <li><a href="/category/@(category.Id)" class="contrast">@category.Name</a></li>
+                    }
+                </ul>
+
+            </div>
+            <div>
+                Number of pages<br />
+                <em>408</em>
+
+                <br /><br />
+                Series<br />
+                <em>-</em>
+            </div>
+        </article>
+
+
+        <h2>Customer reviews</h2>
+        <Reviews BookId="@this.Book.Id" BookReviews="@this.BookReviews" />
+
+        <h2>Customer Comments</h2>
+        <article hx-get="/book/@(this.Book.Id)/comments" hx-trigger="revealed" hx-target="this" hx-swap="outerHTML">
+            <span aria-busy="true">Loading comments...</span>
+        </article>
+    </div>
+</div>
+
+@code {
+    [Parameter, EditorRequired]
+    public BookData Book
+    {
+        get;
+        set;
+    } = default!;
+
+    [Parameter, EditorRequired]
+    public BookReviews BookReviews
+    {
+        get;
+        set;
+    } = default!;
+
+}

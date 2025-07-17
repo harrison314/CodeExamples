@@ -1,0 +1,121 @@
+﻿@inherits LayoutComponentBase
+@inject TheStoryVault.Services.Contracts.ICookieApi CookieApi
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@@picocss/pico@2/css/pico.min.css" />
+    <link rel="stylesheet"
+          href="/css/site.css" />
+    <link rel="stylesheet"
+          href="/TheStoryVault.styles.css" />
+
+    <HeadOutlet />
+    <TheStoryVault.Pages.MainLayoutShared.MetaHtmx />
+</head>
+<body>
+    <header class="container">
+        <nav>
+            <ul>
+                <li>
+                    <a href="/" class="logo"><span>📚</span> The Story Vault</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li>
+                    <input type="search"
+                           name="q"
+                           class="menu-search"
+                           placeholder="Search books, authors"
+                           aria-label="Search"
+                           autocomplete="off"
+                           hx-get="/search"
+                           hx-trigger="input[this.value.length > 2] changed delay:500ms, keyup[key=='Enter' && this.value.length > 2]"
+                           hx-target="main"
+                           hx-indicator="next .htmx-indicator" />
+                </li>
+                <li>
+                    <span aria-busy="true" class="htmx-indicator"></span>
+                </li>
+            </ul>
+
+            <ul>
+                <li><a href="/endOfDemo">About</a></li>
+                <li><a href="/endOfDemo">Services</a></li>
+                <li><a href="/endOfDemo">Products</a></li>
+                <li>
+                    <TheStoryVault.Pages.MainLayoutShared.CathegoriesButton />
+                </li>
+                <li><a role="button" class="secondary outline" href="/endOfDemo">👤 Account</a></li>
+                <li><TheStoryVault.Pages.MainLayoutShared.CardButton Swap="false" /></li>
+            </ul>
+        </nav>
+        <hr />
+    </header>
+    <main class="container">
+        @Body
+    </main>
+    <footer class="container">
+        <div class="grid">
+            <div>
+                <h5>The Story Vault</h5>
+                <p>Your trusted online bookstore since 2020. We're passionate about connecting readers with their perfect books.</p>
+            </div>
+            <div>
+                <h6>Quick Links</h6>
+                <ul>
+                    <li><a href="/endOfDemo">About Us</a></li>
+                    <li><a href="/endOfDemo">Shipping Info</a></li>
+                    <li><a href="/endOfDemo">Returns</a></li>
+                    <li><a href="/endOfDemo">FAQ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h6>Popular Genres</h6>
+                <ul>
+                    <li><a href="/category/4">Science Fiction</a></li>
+                    <li><a href="/category/6">Romance</a></li>
+                    <li><a href="/category/5">Mystery</a></li>
+                    <li><a href="/category/10">Historical Fiction</a></li>
+                </ul>
+            </div>
+            <div>
+                <h6>Contact</h6>
+                <p>📧 info@thestoryvault.com</p>
+                <p>📞 1-800-BOOKS-NOW</p>
+                <p>📍 123 Library Street, Book City, BC 12345</p>
+            </div>
+        </div>
+        <hr />
+        <p class="test-center">
+            <small>
+                &copy; @(DateTime.Now.Year) The Story Vault. All rights reserved. |
+                <a href="/endOfDemo">Privacy Policy</a> |
+                <a href="/endOfDemo">Terms of Service</a> |
+                <a href="#" hx-get="/Common/Cookies" hx-target="body" hx-swap="beforeend">Cookies</a>
+            </small>
+        </p>
+    </footer>
+
+    @if (this.CanCookies())
+    {
+        <TheStoryVault.Pages.MainLayoutShared.CookiePanel />
+    }
+
+    <script src="/lib/htmx/htmx.min.js" type="text/javascript"></script>
+</body>
+</html>
+
+@code
+{
+    private bool CanCookies()
+    {
+        return this.CookieApi.GetTrackingIdentifier().State == Services.Contracts.TrackingIdentifierState.None;
+    }
+}

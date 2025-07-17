@@ -1,0 +1,141 @@
+﻿/*
+    https://www.youtube.com/watch?v=rugYRWQtyTw
+*/
+
+:root {
+    --pico-font-size: 16px;
+    --pico-color-amber-150: rgb(254, 204, 99);
+}
+
+body > footer {
+    background: var(--pico-card-background-color);
+    border-top: 1px solid var(--pico-muted-border-color);
+    margin-top: 4rem;
+}
+
+    body > footer > p {
+        margin: 0 0 0 0;
+    }
+
+body {
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--pico-contrast);
+    text-decoration: none;
+}
+
+/*.menu-serach {
+    margin-bottom:0;
+}*/
+
+
+/*Pokus*/
+.grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-5 {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.grid-6 {
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.grid-8 {
+    grid-template-columns: repeat(8, 1fr);
+}
+
+@media only screen and (max-width: 768px) {
+    .grid-2, .grid-3, .grid-4, .grid-5, .grid-6, .grid-8 {
+        /*grid-template-columns: repeat(1, 1fr);*/
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr))
+    }
+}
+
+.col-1 {
+    grid-column: span 1;
+}
+
+.col-2 {
+    grid-column: span 2;
+}
+
+.col-3 {
+    grid-column: span 3;
+}
+
+.col-4 {
+    grid-column: span 4;
+}
+
+.col-5 {
+    grid-column: span 5;
+}
+
+
+/* Definition list */
+dl {
+    display: grid;
+    grid-template-columns: minmax(max-content, 1fr) minmax(auto, 2fr);
+}
+
+dt {
+    grid-column-start: 1;
+}
+
+dd {
+    grid-column-start: 2;
+    margin: 0;
+}
+
+
+/*Utils class*/
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.block {
+    display: block;
+}
+
+.float-flex {
+    display: flex;
+    width: 100%;
+}
+
+.float-left {
+    justify-content: flex-start;
+}
+
+.float-rigth {
+    justify-content: flex-end;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+/*Fix Pico CSS */
+nav li [role=button], nav li [type=button] {
+    margin-top: 0;
+}

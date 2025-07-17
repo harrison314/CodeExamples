@@ -1,0 +1,77 @@
+﻿
+<div class="grid">
+    <div>
+    </div>
+    <div class="col-2">
+        <h1>Search results</h1>
+    </div>
+</div>
+
+<div class="grid">
+    <article>
+        <form method="get"
+              hx-get="/search/inner"
+              hx-target="#search-results"
+              hx-trigger="input changed delay:500ms, keyup[key=='Enter'], change from:input[type='checkbox'], submit"
+              hx-indicator="#search-results">
+            <fieldset>
+                <label>
+                    Search
+                    <input type="search" name="q" value="@this.Model.Query" />
+                </label>
+            </fieldset>
+
+            <hr />
+
+            <fieldset>
+                <h4>Authors</h4>
+                <label>
+                    <input type="checkbox" name="authors" value="1" />
+                    Aaaaa Bbbbb
+                </label>
+
+                <label>
+                    <input type="checkbox" name="authors" value="2" />
+                    Thaikovsky
+                </label>
+
+                <label>
+                    <input type="checkbox" name="authors" value="3" />
+                    A. B. Coeany
+                </label>
+
+                <label>
+                    <input type="checkbox" name="authors" value="4" />
+                    Agata christy
+                </label>
+            </fieldset>
+
+            <hr />
+            <fieldset>
+                <h4>Cathegories</h4>
+                @foreach (var category in this.Model.Categories)
+                {
+                    <label>
+                        <input type="checkbox" name="categories" value="@category.Id" />
+                        @category.Name
+                    </label>
+                }
+            </fieldset>
+        </form>
+    </article>
+    <div class="col-2">
+        <article id="search-results">
+            <SearchResult Results="@this.Model.Results" />
+        </article>
+    </div>
+</div>
+
+@code {
+    [Parameter, EditorRequired]
+    public SearchModel Model
+    {
+        get;
+        set;
+    } = default!;
+
+}

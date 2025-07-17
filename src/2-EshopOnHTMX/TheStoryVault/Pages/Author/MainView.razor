@@ -1,0 +1,52 @@
+﻿@using TheStoryVault.Services.Contracts
+@layout MainLayout
+
+<PageTitle>Author - @this.Author.Name</PageTitle>
+
+<div class="grid">
+    <div>
+        <section class="text-center">
+            <img src="/images/AuthorPlaceholder.png" alt="@this.Author.Name" class="author-image" />
+        </section>
+        <section class="text-center">
+            <p>@this.Author.Name</p>
+            <p>1897 - 1925</p>
+        </section>
+    </div>
+    <div class="col-2">
+        <h1>@this.Author.Name</h1>
+        <section>
+            @foreach (var genre in this.Author.Description.AsSpan().EnumerateLines())
+            {
+                <p>@genre.ToString()</p>
+            }
+        </section>
+
+        <article>
+            <h2>Author books</h2>
+            <div>
+                @foreach (var book in this.Books)
+                {
+                    <TheStoryVault.Pages.MainLayoutShared.BookInfoVertical Book="@book" />
+                }
+            </div>
+        </article>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public AuthorData Author
+    {
+        get;
+        set;
+    } = default!;
+
+    [Parameter]
+    public IList<BookRecord> Books
+    {
+        get;
+        set;
+    } = default!;
+
+}

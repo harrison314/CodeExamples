@@ -1,0 +1,13 @@
+﻿@layout MainLayout
+
+<MainError ErrorMessage="@this.ErrorMessage" />
+
+@code {
+    [Parameter]
+    public string? ErrorMessage
+    {
+        get;
+        set;
+    } = "An unexpected error occurred.";
+
+}

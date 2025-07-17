@@ -1,0 +1,46 @@
+﻿@using Microsoft.AspNetCore.Antiforgery
+@using System.Web
+@inject IAntiforgery Antiforgery
+@inject IHttpContextAccessor HttpContextAccessor
+
+<meta name="htmx-config" content="@this.config" />
+<script type="text/javascript">
+        document.addEventListener("htmx:configRequest", (evt) => {
+        let httpVerb = evt.detail.verb.toUpperCase();
+        if (httpVerb === 'GET') return;
+
+        let antiForgery = htmx.config.antiForgery;
+        if (antiForgery) {
+            if (evt.detail.parameters[antiForgery.formFieldName])
+                return;
+
+            if (antiForgery.headerName) {
+                evt.detail.headers[antiForgery.headerName] = antiForgery.requestToken;
+            } else {
+                 evt.detail.parameters[antiForgery.formFieldName] = antiForgery.requestToken;
+            }
+        }
+    });
+</script>
+
+@code {
+    private string config = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        var antiforgery = this.Antiforgery.GetAndStoreTokens(this.HttpContextAccessor.HttpContext!);
+        var jsonToken = new
+        {
+            formFieldName = antiforgery.FormFieldName,
+            headerName = antiforgery.HeaderName,
+            // important or token gets warped
+            requestToken = HttpUtility.HtmlAttributeEncode(antiforgery.RequestToken)!
+        };
+        this.config =
+        string.Concat("{",
+         "\"antiForgery\":",
+           System.Text.Json.JsonSerializer.Serialize(jsonToken),
+           ", \"responseHandling\": [{\"code\":\"200\", \"swap\":true},{\"code\":\"204\", \"swap\": false}, {\"code\":\"500\", \"swap\": true, \"error\":true}, {\"code\":\"500\", \"swap\": true, \"error\":true}]",
+        "}");
+    }
+}

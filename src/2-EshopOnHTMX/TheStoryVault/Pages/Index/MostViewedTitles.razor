@@ -1,0 +1,58 @@
+﻿@using TheStoryVault.Services.Contracts
+@using TheStoryVault.Pages.Index.UseCases
+@inject CaseR.IUseCase<MostViewedBooksInteractor> mostViewedBooksInteractor
+<article>
+    <header>
+        <h3>Most viewed titles</h3>
+        <small>Trends in viewing and sales in recent days</small>
+    </header>
+
+    <div role="group">
+        <button role="button" class="@GetStyle(BookType.Both)" hx-get="/MostViewedTitles/Both" hx-trigger="click" hx-target="closest article" hx-swap="outerHTML" hx-indicator="closest article">All</button>
+        <button role="button" class="@GetStyle(BookType.Paperback)" hx-get="/MostViewedTitles/Paperback" hx-trigger="click" hx-target="closest article" hx-swap="outerHTML" hx-indicator="closest article">Books</button>
+        <button role="button" class="@GetStyle(BookType.Ebook)" hx-get="/MostViewedTitles/Ebook" hx-trigger="click" hx-target="closest article" hx-swap="outerHTML" hx-indicator="closest article">E-Books</button>
+    </div>
+
+    <div>
+        @foreach (var book in this.books)
+        {
+            <div class="grid">
+                <div class="text-center">
+                    <img src="@book.CoverImageUrl" width="80" />
+                </div>
+                <div class="col-2">
+                    <a href="/book/@(book.Id)" class="contrast block">
+                        <strong>@book.Title</strong>
+                    </a>
+                    <small class="block">@book.Author</small>
+                    <strong class="block">@book.Price.ToString(".00") €</strong>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="htmx-indicator">
+        <span aria-busy="true">Loading...</span>
+    </div>
+</article>
+
+@code {
+    private IList<BookRecord> books = new List<BookRecord>();
+
+    [Parameter, EditorRequired]
+    public BookType Type
+    {
+        get; set;
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        this.books = await this.mostViewedBooksInteractor.Execute(new MostViewedBooksInteractorRequest(this.Type, 10),
+        default);
+    }
+
+    private string GetStyle(BookType type)
+    {
+        return type == this.Type ? "outline" : string.Empty;
+    }
+}

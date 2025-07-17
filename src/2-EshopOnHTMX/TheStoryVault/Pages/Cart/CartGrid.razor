@@ -1,0 +1,81 @@
+﻿<div id="cart-data">
+    @foreach (var item in Cart.Books)
+    {
+        <div class="grid">
+            <div class="text-center">
+                <img src="@item.Book.CoverImageUrl" alt="@item.Book.Title" width="80" />
+            </div>
+            <div class="col-4">
+                <a href="/book/@(item.Book.Id)" class="contrast block">
+                    <strong>@item.Book.Title</strong>
+                </a>
+                <small class="block">@item.Book.Author</small>
+                <strong class="block">@item.Book.Price.ToString(".00") €</strong>
+            </div>
+            <div class="inputs">
+                <fieldset role="group">
+                    <button role="button"
+                            hx-post="/cart/remove/@(item.Book.Id)"
+                            hx-target="#cart-data"
+                            hx-swap="innerHTML"
+                            hx-indicator="closest .inputs">
+                        -
+                    </button>
+                    <input type="text" value="@item.Count" readonly="readonly" />
+                    <button role="button"
+                            hx-post="/cart/add/@(item.Book.Id)"
+                            hx-target="#cart-data"
+                            hx-swap="innerHTML"
+                            hx-indicator="closest .inputs">
+                        +
+                    </button>
+                </fieldset>
+                <span aria-busy="true" class="htmx-indicator">Loading ...</span>
+            </div>
+        </div>
+    }
+
+    <article>
+        <p>Buy by:</p>
+        <section class="price">@this.Cart.Price.ToString("0.00") €</section>
+    </article>
+
+    <div class="flex-container">
+        @if (this.Cart.Books.Any())
+        {
+            <button role="button"
+                    class="outline"
+                    hx-delete="/cart"
+                    hx-swap="none">
+                Clear cart
+            </button>
+
+            <a role="button"
+               class=""
+               href="/order">
+                To order
+            </a>
+        }
+    </div>
+</div>
+
+@if (this.SwapCardButton)
+{
+    <TheStoryVault.Pages.MainLayoutShared.CardButton Swap="true" />
+}
+
+@code {
+    [Parameter]
+    public BookCartTotal Cart
+    {
+        get;
+        set;
+    } = default!;
+
+    [Parameter]
+    public bool SwapCardButton
+    {
+        get;
+        set;
+    } = false;
+}

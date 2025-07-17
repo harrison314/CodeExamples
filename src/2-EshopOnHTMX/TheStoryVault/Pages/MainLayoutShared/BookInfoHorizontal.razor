@@ -1,0 +1,24 @@
+﻿@using TheStoryVault.Services.Contracts
+
+<div class="grid book-info">
+    <div class="text-center">
+        <img src="@Book.CoverImageUrl" width="80" alt="@Book.Title" />
+    </div>
+    <div class="col-2">
+        <a href="/book/@(Book.Id)" class="contrast block">
+            <strong>@Book.Title</strong>
+        </a>
+        <small class="block">@Book.Author</small>
+        <strong class="block">@Book.Price.ToString(".00") €</strong>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public BookRecord Book
+    {
+        get;
+        set;
+    } = default!;
+
+}

@@ -1,0 +1,30 @@
+﻿@using Microsoft.Extensions.Caching.Memory
+@using TheStoryVault.Services.Contracts
+@using TheStoryVault.Services.Data
+@inject StoryVaultContext StoryVaultContextInstance
+@inject IMemoryCache MemoryCache
+
+<details class="dropdown">
+    <summary>
+        Categories
+    </summary>
+    <ul dir="rtl">
+        @if (this.categories != null)
+        {
+            @foreach (CategoryInfo info in this.categories)
+            {
+                <li><a href="/category/@(info.Id)">@info.Name</a></li>
+            }
+        }
+    </ul>
+</details>
+
+@code {
+    private IList<CategoryInfo>? categories = default;
+
+    protected override async Task OnInitializedAsync()
+    {
+        this.categories = await this.MemoryCache.GetOrCreateAsync<IList<CategoryInfo>>("categories", 
+        async (e) => await this.StoryVaultContextInstance.GetCategories(new GetAllCategoryQuery(), default));
+    }
+}

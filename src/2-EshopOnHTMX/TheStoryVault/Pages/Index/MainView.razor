@@ -1,0 +1,44 @@
+﻿@using TheStoryVault.Services.Contracts
+@layout MainLayout
+
+<PageTitle>The Story Vault</PageTitle>
+<div class="grid">
+    <div class="col-2">
+        <BooksCard Title="You might be interested"
+                   Description="Backend book boot recommendations"
+                   Books="@this.Interesting" />
+        <BooksCard Title="News"
+                   Description="Backend book boot recommendations"
+                   Books="@this.News" />
+
+        <BooksCard Title="E-Book news"
+                   Description="Backend ant's colony recommendations"
+                   Books="@this.EBookNews" />
+    </div>
+    <div hx-get="/MostViewedTitles/Both" hx-trigger="load">
+        <article aria-busy="true"></article>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public IList<BookRecord> Interesting
+    {
+        get;
+        set;
+    } = default!;
+
+    [Parameter]
+    public IList<BookRecord> News
+    {
+        get;
+        set;
+    } = default!;
+
+    [Parameter]
+    public IList<BookRecord> EBookNews
+    {
+        get;
+        set;
+    } = default!;
+}

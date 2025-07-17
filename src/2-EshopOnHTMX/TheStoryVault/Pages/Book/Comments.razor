@@ -1,0 +1,137 @@
+﻿@using TheStoryVault.Services.Contracts
+<article>
+    <section>
+        <form method="post"
+              hx-post="/book/@(this.BookId)/comments"
+              hx-trigger="submit"
+              hx-target="closest article"
+              hx-validate="true"
+              hx-swap="outerHTML">
+            <fieldset>
+                <label>
+                    Title
+                    <input name="Title"
+                           placeholder=""
+                           autocomplete="off"
+                           required="required"
+                           minlength="3"
+                           maxlength="20"
+                           aria-invalid="@this.GetAriaValidity("Title")"
+                           aria-describedby="@this.GetDescribedByValidity("Title")" />
+
+                    @this.ShowErrorMessagesFor("Title")
+                </label>
+                <label>
+                    Your review
+                    <textarea name="Review"
+                              placeholder=""
+                              aria-label=""
+                              required="required"
+                              minlength="3"
+                              maxlength="800"
+                              aria-invalid="@this.GetAriaValidity("Review")"
+                              aria-describedby="@this.GetDescribedByValidity("Review")"></textarea>
+
+                    @this.ShowErrorMessagesFor("Review")
+                </label>
+            </fieldset>
+
+            <button type="submit">
+                <span aria-busy="true" class="htmx-indicator-button"></span>  Submit review
+            </button>
+        </form>
+    </section>
+
+    <hr />
+
+    @foreach (TextReview review in this.Reviews)
+    {
+        <section class="comment">
+            <header class="grid">
+                <div class="col-4">
+                    <span class="avatar">@this.GetAvatar(review.UserId)</span>
+
+                    <strong>@review.UserId</strong>
+                </div>
+                <div class="col-2"></div>
+                <div class="col-2">
+                    @review.ReviewAt
+                    @if (review.Stars > 0)
+                    {
+                        <br />
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            <span class="@(review.Stars >= i ? "selected" : null)">★</span>
+                        }
+                    }
+                </div>
+            </header>
+
+            <h4>@review.Title</h4>
+            <section>
+                @foreach (string line in review.Text.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    <p>@line</p>
+                }
+            </section>
+        </section>
+    }
+
+</article>
+
+@code {
+    [Parameter]
+    public int BookId
+    {
+        get;
+        set;
+    } = default!;
+
+    [Parameter]
+    public IList<TextReview> Reviews
+    {
+        get;
+        set;
+    } = default!;
+
+    [Parameter]
+    public List<KeyValuePair<string, string>>? FormErrors
+    {
+        get;
+        set;
+    }
+
+    private string? GetAriaValidity(string name)
+    {
+        bool isValid = this.FormErrors == null || !this.FormErrors.Any(t => t.Key == name);
+
+        return isValid ? null : "true";
+    }
+
+    private string? GetDescribedByValidity(string name)
+    {
+        bool isValid = this.FormErrors == null || !this.FormErrors.Any(t => t.Key == name);
+
+        return isValid ? null : $"err-{name}-1";
+    }
+
+    private RenderFragment ShowErrorMessagesFor(string name)
+    {
+        if (this.FormErrors != null && this.FormErrors.Count > 0)
+        {
+            string errors = string.Join(" ", this.FormErrors.Where(t => t.Key == name).Select(t => t.Value));
+            return @<small id="err-@(name)-1">@errors</small>;
+        }
+
+        return @<text></text>;
+    }
+
+
+    public string GetAvatar(string userId)
+    {
+        string[] avatars = new string[] { "🕵️‍♀️", "🥷", "👨‍🎓", "👩‍⚕️", "👩‍🌾", "🧑‍🏫", "🧑‍🏭", "🧑‍🔬", "🧛‍♂️", "🧙‍♂️", "🧙", "🧑‍🦯‍", "🏇" };
+        int hash = userId.GetHashCode();
+        hash = hash < 0 ? 0 - hash : hash;
+        return avatars[hash % avatars.Length];
+    }
+}

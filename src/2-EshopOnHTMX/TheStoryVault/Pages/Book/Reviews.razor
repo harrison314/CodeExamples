@@ -1,0 +1,93 @@
+﻿@using TheStoryVault.Services.Contracts
+<article>
+    <div class="grid">
+        <div class="text-center">
+            @if (this.BookReviews.ReviewsCount > 0)
+            {
+                <div class="number-review">
+                    @(this.BookReviews.AvgValue) / 5
+                </div>
+            }
+
+            <div>
+                <small>@(this.BookReviews.ReviewsCount) reviews</small>
+            </div>
+        </div>
+        <div class="col-2">
+            <table class="review-table">
+                <tbody>
+                    <tr>
+                        <td>★★★★★</td>
+                        <td>@(this.BookReviews.NumberOf5Stars)</td>
+                        <td>@ProcessTag(this.BookReviews.NumberOf5Stars)</td>
+                    </tr>
+                    <tr>
+                        <td>★★★★</td>
+                        <td>@(this.BookReviews.NumberOf4Stars)</td>
+                        <td>@ProcessTag(this.BookReviews.NumberOf4Stars)</td>
+                    </tr>
+                    <tr>
+                        <td>★★★</td>
+                        <td>@(this.BookReviews.NumberOf3Stars)</td>
+                        <td>@ProcessTag(this.BookReviews.NumberOf3Stars)</td>
+                    </tr>
+                    <tr>
+                        <td>★★</td>
+                        <td>@(this.BookReviews.NumberOf2Stars)</td>
+                        <td>@ProcessTag(this.BookReviews.NumberOf2Stars)</td>
+                    </tr>
+                    <tr>
+                        <td>★</td>
+                        <td>@(this.BookReviews.NumberOf1Stars)</td>
+                        <td>@ProcessTag(this.BookReviews.NumberOf1Stars)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <hr />
+
+    <p>Your review:</p>
+    <div class="rating">
+        @for (int i = 1; i <= 5; i++)
+        {
+            <span class="@(this.BookReviews.CurrentUserReview.HasValue && this.BookReviews.CurrentUserReview.Value >= (6 - i) ? "selected" : null)"
+                  hx-post="/book/@(this.BookId)/review"
+                  hx-vars="review:@(6-i)"
+                  hx-trigger="click"
+                  hx-swap="outerHTML"
+                  hx-target="closest article"
+                  >★</span>
+        }
+    </div>
+</article>
+
+@code {
+    [Parameter, EditorRequired]
+    public int BookId
+    {
+        get;
+        set;
+    }
+
+    [Parameter, EditorRequired]
+    public BookReviews BookReviews
+    {
+        get;
+        set;
+    } = default!;
+
+    private RenderFragment ProcessTag(int number)
+    {
+        if (this.BookReviews.ReviewsCount > 0)
+        {
+            double percentage = (number * 100.0) / this.BookReviews.ReviewsCount;
+            int value = (int)Math.Round(percentage);
+
+            return @<progress value="@value" max="100" />;
+        }
+
+        return @<progress value="0" max="100" />;
+    }
+}
