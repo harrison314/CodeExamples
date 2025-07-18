@@ -4,12 +4,12 @@ using TheStoryVault.Services.Contracts;
 
 namespace TheStoryVault.Pages.Book.UseCases;
 
-public class GetBookByIdHandler : IUseCaseInteractor<int, BookData>
+public class GetBookByIdInteractor : IUseCaseInteractor<int, BookData>
 {
     private readonly IBookService bookService;
     private readonly IDomainEventPublisher eventPublisher;
 
-    public GetBookByIdHandler(IBookService bookService, IDomainEventPublisher eventPublisher)
+    public GetBookByIdInteractor(IBookService bookService, IDomainEventPublisher eventPublisher)
     {
         this.bookService = bookService;
         this.eventPublisher = eventPublisher;

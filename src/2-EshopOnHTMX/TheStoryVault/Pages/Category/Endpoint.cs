@@ -12,10 +12,10 @@ internal static class Endpoint
     public static void MapEndpoints(IEndpointRouteBuilder app)
     {
         app.MapGet("/category/{id}", async (int id,
-            IUseCase<GetCathegoryByIdHandler> getCathegoryById,
+            IUseCase<GetCathegoryByIdInteractor> getCathegoryById,
             CancellationToken cancellationToken) =>
         {
-            GetCathegoryByIdResponse data = await getCathegoryById.Execute<GetCathegoryByIdHandler, int, GetCathegoryByIdResponse>(id, cancellationToken);
+            GetCathegoryByIdResponse data = await getCathegoryById.Execute<GetCathegoryByIdInteractor, int, GetCathegoryByIdResponse>(id, cancellationToken);
 
             return new RazorComponentResult<TheStoryVault.Pages.Category.MainView>(new Dictionary<string, object?>()
             {
@@ -26,10 +26,10 @@ internal static class Endpoint
 
         app.MapGet("/category/{id}/books", async (int id,
             [FromQuery(Name = "page")] int page,
-            IUseCase<GetBooksByCathegoryHandler> getBooksByCathegory,
+            IUseCase<GetBooksByCathegoryInteractor> getBooksByCathegory,
             CancellationToken cancellationToken) =>
         {
-            BookPager pager = await getBooksByCathegory.Execute<GetBooksByCathegoryHandler, GetBooksByCathegoryQuery, BookPager>(
+            BookPager pager = await getBooksByCathegory.Execute<GetBooksByCathegoryInteractor, GetBooksByCathegoryQuery, BookPager>(
                 new GetBooksByCathegoryQuery(id, page, true), cancellationToken);
 
             return new RazorComponentResult<TheStoryVault.Pages.Category.AuthorBooks>(new Dictionary<string, object?>()

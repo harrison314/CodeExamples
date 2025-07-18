@@ -9,8 +9,8 @@ internal static class Endpoint
 {
     public static void MapEndpoints(IEndpointRouteBuilder app)
     {
-        app.MapGet("/author/{id}", async (int id, IUseCase<GetAuthorByIdHandler> getAuthorbyId,
-            IUseCase<GetBooksByAuthorHanler> getBookByAuthor,
+        app.MapGet("/author/{id}", async (int id, IUseCase<GetAuthorByIdInteractor> getAuthorbyId,
+            IUseCase<GetBooksByAuthorInteractor> getBookByAuthor,
             CancellationToken cancellationToken) =>
         {
             AuthorData author = await getAuthorbyId.Execute(id, cancellationToken);

@@ -11,11 +11,11 @@ internal static class Endpoint
     public static void MapEndpoints(IEndpointRouteBuilder app)
     {
         app.MapGet("/book/{id}", async (int id,
-            IUseCase<GetBookByIdHandler> getBookById,
+            IUseCase<GetBookByIdInteractor> getBookById,
             IUseCase<GetReviewsByBookIdInteractor> getReviewsByBookId,
             CancellationToken cancellationToken) =>
         {
-            BookData book = await getBookById.Execute<GetBookByIdHandler, int, BookData>(id, cancellationToken);
+            BookData book = await getBookById.Execute<GetBookByIdInteractor, int, BookData>(id, cancellationToken);
             BookReviews reviews = await getReviewsByBookId.Execute<GetReviewsByBookIdInteractor, int, BookReviews>(id, cancellationToken);
 
             return new RazorComponentResult<TheStoryVault.Pages.Book.MainView>(new Dictionary<string, object?>()

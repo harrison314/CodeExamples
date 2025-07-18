@@ -4,11 +4,11 @@ using TheStoryVault.Services.Data;
 
 namespace TheStoryVault.Pages.Author.UseCases;
 
-public class GetBooksByAuthorHanler : IUseCaseInteractor<GetBooksByAuthorQuery, IList<BookRecord>>
+public class GetBooksByAuthorInteractor : IUseCaseInteractor<GetBooksByAuthorQuery, IList<BookRecord>>
 {
     private readonly StoryVaultContext storyVaultContext;
 
-    public GetBooksByAuthorHanler(StoryVaultContext storyVaultContext)
+    public GetBooksByAuthorInteractor(StoryVaultContext storyVaultContext)
     {
         this.storyVaultContext = storyVaultContext;
     }

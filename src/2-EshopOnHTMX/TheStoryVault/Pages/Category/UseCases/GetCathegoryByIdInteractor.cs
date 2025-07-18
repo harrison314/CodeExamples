@@ -3,13 +3,13 @@ using CaseR;
 
 namespace TheStoryVault.Pages.Category.UseCases;
 
-public class GetCathegoryByIdHandler : IUseCaseInteractor<int, GetCathegoryByIdResponse>
+public class GetCathegoryByIdInteractor : IUseCaseInteractor<int, GetCathegoryByIdResponse>
 {
     private readonly ICategoryService categoryService;
-    private readonly IUseCase<GetBooksByCathegoryHandler> getBooksByCathegory;
+    private readonly IUseCase<GetBooksByCathegoryInteractor> getBooksByCathegory;
 
-    public GetCathegoryByIdHandler(ICategoryService categoryService,
-        IUseCase<GetBooksByCathegoryHandler> getBooksByCathegory)
+    public GetCathegoryByIdInteractor(ICategoryService categoryService,
+        IUseCase<GetBooksByCathegoryInteractor> getBooksByCathegory)
     {
         this.categoryService = categoryService;
         this.getBooksByCathegory = getBooksByCathegory;
@@ -19,7 +19,7 @@ public class GetCathegoryByIdHandler : IUseCaseInteractor<int, GetCathegoryByIdR
     {
         CategoryData cathegoryData = await this.categoryService.GetById(request, cancellationToken);
 
-        BookPager books = await this.getBooksByCathegory.Execute<GetBooksByCathegoryHandler, GetBooksByCathegoryQuery, BookPager>(
+        BookPager books = await this.getBooksByCathegory.Execute<GetBooksByCathegoryInteractor, GetBooksByCathegoryQuery, BookPager>(
             new GetBooksByCathegoryQuery(request, 1, false), cancellationToken);
 
         return new GetCathegoryByIdResponse(cathegoryData, books);

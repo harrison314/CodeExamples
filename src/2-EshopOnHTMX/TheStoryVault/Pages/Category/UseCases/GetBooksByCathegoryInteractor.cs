@@ -4,12 +4,12 @@ using TheStoryVault.Services.Data;
 
 namespace TheStoryVault.Pages.Category.UseCases;
 
-public class GetBooksByCathegoryHandler : IUseCaseInteractor<GetBooksByCathegoryQuery, BookPager>
+public class GetBooksByCathegoryInteractor : IUseCaseInteractor<GetBooksByCathegoryQuery, BookPager>
 {
     private readonly StoryVaultContext storyVaultContext;
     private readonly ICategoryService categoryService;
 
-    public GetBooksByCathegoryHandler(StoryVaultContext storyVaultContext, ICategoryService categoryService)
+    public GetBooksByCathegoryInteractor(StoryVaultContext storyVaultContext, ICategoryService categoryService)
     {
         this.storyVaultContext = storyVaultContext;
         this.categoryService = categoryService;

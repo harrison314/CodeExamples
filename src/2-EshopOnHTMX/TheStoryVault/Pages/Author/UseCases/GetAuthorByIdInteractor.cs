@@ -6,12 +6,12 @@ using TheStoryVault.Services.Data;
 
 namespace TheStoryVault.Pages.Author.UseCases;
 
-public class GetAuthorByIdHandler : IUseCaseInteractor<int, AuthorData>
+public class GetAuthorByIdInteractor : IUseCaseInteractor<int, AuthorData>
 {
     private StoryVaultContext storyVaultContext;
     private readonly IUseCase<SendMessageInteractor> sendMessageUseCase;
 
-    public GetAuthorByIdHandler(StoryVaultContext storyVaultContext,
+    public GetAuthorByIdInteractor(StoryVaultContext storyVaultContext,
         [FromKeyedServices(UseCaseRelation.Include)] IUseCase<SendMessageInteractor> sendMessageUseCase)
     {
         this.storyVaultContext = storyVaultContext;
