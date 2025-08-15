@@ -28,6 +28,33 @@ stateDiagram
 Example C doe:
 
 ```c
+SM_DEFINE_STATE(STOP);
+SM_DEFINE_STATE(PREPARE_ON);
+SM_DEFINE_STATE(PREPARE_OFF);
+SM_DEFINE_STATE(RUN);
+
+SM_DECLARE_FUNCTION(runMachine);
+
+SM_state_t arduinoState;
+
+void setup()
+{
+  pinMode(LED_R, OUTPUT);
+  pinMode(LED_G, OUTPUT);
+  pinMode(LED_B, OUTPUT);
+  pinMode(GPIO_BTN, INPUT_PULLUP);
+
+  Serial.begin(9600);
+
+  SM_INIT(&arduinoState, STOP);
+}
+
+void loop()
+{
+  runMachine(&arduinoState);
+}
+
+
 SM_DEFINE_FUNCTION_BEGIN(runMachine)
   SM_STATE_BEGIN(STOP, stopAction)
     SM_TRASITION(buttonPressed, PREPARE_ON)
