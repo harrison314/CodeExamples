@@ -54,10 +54,33 @@ void loop()
   runMachine(&arduinoState);
 }
 
+// trasition function
+int buttonPressed(SM_state_t *state)
+{
+  return digitalRead(GPIO_BTN) == LOW;
+}
 
-SM_DEFINE_FUNCTION_BEGIN(runMachine)
-  SM_STATE_BEGIN(STOP, stopAction)
-    SM_TRASITION(buttonPressed, PREPARE_ON)
+// state action function
+void stopAction(SM_state_t *state, int phase)
+{
+  if (phase == SM_PHASE_ENTERING)
+  {
+    digitalWrite(LED_R, HIGH);
+  }
+  else if (phase == SM_PHASE_EXIT)
+  {
+    digitalWrite(LED_R, LOW);
+  }
+  else if (phase == SM_PHASE_DO)
+  {
+    // NOP
+  }
+}
+
+
+SM_DEFINE_FUNCTION_BEGIN(runMachine) // define the state machine function
+  SM_STATE_BEGIN(STOP, stopAction) // handle state using action
+    SM_TRASITION(buttonPressed, PREPARE_ON) // transition to another state using transition function
   SM_STATE_END()
 
   SM_STATE_BEGIN(PREPARE_ON, prepareOnAction)
