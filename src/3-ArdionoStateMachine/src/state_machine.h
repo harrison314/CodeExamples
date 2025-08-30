@@ -81,3 +81,18 @@ int smTimerElapsed(SM_timer_t *timer, unsigned long duration)
 
     return 0;
 }
+
+const char* getPhaseName(int phase)
+{
+    switch (phase)
+    {
+    case SM_PHASE_ENTERING:
+        return "ENTERING";
+    case SM_PHASE_DO:
+        return "DO";
+    case SM_PHASE_EXIT:
+        return "EXIT";
+    default:
+        return "UNKNOWN";
+    }
+}
