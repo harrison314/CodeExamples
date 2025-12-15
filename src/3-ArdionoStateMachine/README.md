@@ -88,7 +88,7 @@ SM_DEFINE_FUNCTION_BEGIN(runMachine) // define the state machine function
     SM_TRASITION_INLINE(smTimerElapsed(&timer1, 1500), PREPARE_OFF)
   SM_STATE_END()
 
-  SM_STATE_BEGIN(PREPARE_OFF, prepareOnAction)
+  SM_STATE_BEGIN(PREPARE_OFF, prepareOffAction)
     SM_TRASITION(buttonPressed, RUN)
     SM_TRASITION_INLINE(smTimerElapsed(&timer2, 1000), PREPARE_ON)
   SM_STATE_END()
