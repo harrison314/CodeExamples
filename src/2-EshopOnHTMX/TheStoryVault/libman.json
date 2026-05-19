@@ -3,7 +3,7 @@
   "defaultProvider": "cdnjs",
   "libraries": [
     {
-      "library": "htmx@2.0.6",
+      "library": "htmx@2.0.7",
       "destination": "wwwroot/lib/htmx"
     }
   ]

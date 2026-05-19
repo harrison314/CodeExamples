@@ -15,4 +15,10 @@ public class BookInteraction
     public string InteractionType { get; set; }
     public DateTime Time { get; set; }
 
+    public BookInteraction()
+    {
+        this.UserId = string.Empty;
+        this.InteractionType = string.Empty;
+    }
+
 }

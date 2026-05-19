@@ -16,7 +16,7 @@ Some components are lazy to load because they have a separate cache. Others, to 
 The backend is not tuned the way I would like, because I started with the service architecture and later rewrite it into the vertical slices architecture.
 
 ## Get started
-1. Install [.Net 9 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
+1. Install [.Net 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0)
 1. Build using `dotnet build`
 1. Configure connection string and database type in _appsettings.json_ (MsSql, Sqlite or MariaDb)
 1. Create database with data using `dotnet run -- --migrate`
@@ -26,9 +26,9 @@ The backend is not tuned the way I would like, because I started with the servic
 The project is linked so that each page is placed in a separate folder that contains the main content and all its components,
 static class `Endpoint` contains the definitions of the endpoints used for that page.
 
-- [.NET 9.0](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
-- [ASP.NET Minimal API](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis?view=aspnetcore-9.0)
-- [Blazor Components](https://learn.microsoft.com/en-us/aspnet/core/blazor/?view=aspnetcore-9.0) - for reusable UI components
+- [.NET 10.0](https://dotnet.microsoft.com/en-us/download/dotnet/10.0)
+- [ASP.NET Minimal API](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis?view=aspnetcore-10.0)
+- [Blazor Components](https://learn.microsoft.com/en-us/aspnet/core/blazor/?view=aspnetcore-10.0) - for reusable UI components
 - [HTMX](https://htmx.org/) - for dynamic HTML updates
 - [PicoCSS](https://picocss.com/) - a lightweight CSS framework for semantic HTML
 - CSS isolation for components

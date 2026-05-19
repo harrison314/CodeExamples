@@ -44,9 +44,15 @@ public class Program
         }
         else if (type == "MariaDb")
         {
-            builder.Services.AddDbContext<TheStoryVault.Services.Data.StoryVaultContext>(options =>
-               options.UseMySql(builder.Configuration.GetConnectionString("MariaDbConnection"),
-               ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("MariaDbConnection"))));
+            throw new NotImplementedException("Waiting for https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql/ upgrade to .NET 10");
+            //builder.Services.AddDbContext<TheStoryVault.Services.Data.StoryVaultContext>(options =>
+            //   options.UseMySql(builder.Configuration.GetConnectionString("MariaDbConnection"),
+            //   ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("MariaDbConnection"))));
+        }
+        else if(type == "MongoDb")
+        {
+            throw new NotImplementedException("MongoDb is not supported");
+            MongoRegister.RegisterMongodb(builder);
         }
         else
         {
@@ -60,7 +66,6 @@ public class Program
         builder.Services.AddScoped<Services.Contracts.ICategoryService, Services.Implementation.CategoryService>();
         builder.Services.AddScoped<Services.Contracts.ITrackingService, Services.Implementation.TrackingService>();
 
-        MongoRegister.RegisterMongodb(builder);
 
         builder.Services.AddOutputCache(options =>
         {
