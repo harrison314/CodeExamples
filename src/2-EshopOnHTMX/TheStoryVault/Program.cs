@@ -60,6 +60,8 @@ public class Program
         builder.Services.AddScoped<Services.Contracts.ICategoryService, Services.Implementation.CategoryService>();
         builder.Services.AddScoped<Services.Contracts.ITrackingService, Services.Implementation.TrackingService>();
 
+        MongoRegister.RegisterMongodb(builder);
+
         builder.Services.AddOutputCache(options =>
         {
             options.AddPolicy(PolicyNames.Cache.Default, policy =>
