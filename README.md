@@ -6,3 +6,4 @@ The repository is used for various code samples and projects.
 1. [eShop on HTMX](/src/2-EshopOnHTMX/) with Blazor components
 1. [State machine builder for Arduino](/src/3-ArdionoStateMachine/)
 1. [Create TSL request using BouncyCastle](/src/4-TslUsingBouncyCastle/)
+1. [Create HTTPS client using BouncyCastle](/src/5-HttpsUsingBouncyCastle/)
